@@ -12,12 +12,12 @@ public class PlayerMovement : MonoBehaviour
     public GameObject explodingBoom;
     public float traiPhai;
     public float lenXuong;
-    public bool isFacingRight =true;
+    public bool isFacingRight = true;
     public int tocDo = 4;
-   private Vector3 originalScale;
+    private Vector3 originalScale;
     void Start()
     {
-        originalScale=transform.localScale;
+        originalScale = transform.localScale;
         directionControl = bullet.GetComponent<DirectionControl>();
         directionControlBoom1 = explodingBoom.GetComponent<DirectionControlBoom>();
         boxCollider2D = GetComponent<BoxCollider2D>();
@@ -33,45 +33,45 @@ public class PlayerMovement : MonoBehaviour
 
     public void Movement()
     {
-        traiPhai=Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(tocDo*traiPhai,rb.velocity.y);
+        traiPhai = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(tocDo * traiPhai, rb.velocity.y);
 
-        if(isFacingRight == true && traiPhai == -1)
+        if (isFacingRight == true && traiPhai == -1)
         {
-            transform.localScale = new Vector3(-1,1,1);
-            isFacingRight =false;
+            transform.localScale = new Vector3(-1, 1, 1);
+            isFacingRight = false;
 
-           
-            directionControl.direction =Vector3.left;
+
+            directionControl.direction = Vector3.left;
         }
-        else if(isFacingRight == false && traiPhai == 1)
+        else if (isFacingRight == false && traiPhai == 1)
         {
-            transform.localScale = new Vector3(1,1,1);
-            isFacingRight =true;
+            transform.localScale = new Vector3(1, 1, 1);
+            isFacingRight = true;
 
-           
-            directionControl.direction =Vector3.right;
+
+            directionControl.direction = Vector3.right;
         }
 
-        lenXuong = Input.GetAxis("Vertical"); 
+        lenXuong = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(0f, lenXuong, 0f) * tocDo * Time.deltaTime;
         transform.Translate(movement);
-        
+
     }
-    
+
     public void Attack()
     {
         if (Input.GetKey(KeyCode.J))
         {
             // Bắn
             Debug.Log("Fireeeeeeeeeeeeeeee");
-            Instantiate(bullet,transform.position,Quaternion.identity);
+            Instantiate(bullet, transform.position, Quaternion.identity);
         }
-        else if(Input.GetKey(KeyCode.K))
+        else if (Input.GetKey(KeyCode.K))
         {
             // Ném bom
             Debug.Log("Booooooommmm");
-            Instantiate(explodingBoom,transform.position,Quaternion.identity);
+            Instantiate(explodingBoom, transform.position, Quaternion.identity);
         }
     }
 
